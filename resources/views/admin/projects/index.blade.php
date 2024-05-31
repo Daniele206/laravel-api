@@ -27,38 +27,40 @@
                 <div class="mt-3 ms-2 p-3 w-98 bg-light shadow">
                     <h2>Aggiungi Project <a href="{{ route('admin.projects.create') }}" class="fa-solid fa-plus text-decoration-none"></a></h2>
                 </div>
-                <table class="table mt-3 ms-2 w-98 shadow">
-                    <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Type</th>
-                        <th scope="col"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($projects as $project)
-                            <tr>
-                                <th scope="row">{{ $project->name }}</th>
-                                <td>
-                                    @if (isset($project->type->name))
-                                        {{ $project->type->name }}
-                                    @else
-                                        ---
-                                    @endif
-                                </td>
-                                <td class="d-flex justify-content-end">
-                                    <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-success mx-1"><i class="fa-solid fa-eye"></i></a>
-                                    <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-warning mx-1"><i class="fa-solid fa-pen"></i></a>
-                                    <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" onsubmit="return confirm('Sicuro di voler eliminare il progetto {{ $project->name }}?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger mx-1" href="#"><i class="fa-solid fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <div class="mt-3 ms-2 w-98 shadow overflow-auto" style="max-height: 80vh">
+                    <table class="table mb-0">
+                        <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Type</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody class="overflow-auto">
+                            @foreach ($projects as $project)
+                                <tr>
+                                    <th scope="row">{{ $project->name }}</th>
+                                    <td>
+                                        @if (isset($project->type->name))
+                                            {{ $project->type->name }}
+                                        @else
+                                            ---
+                                        @endif
+                                    </td>
+                                    <td class="d-flex justify-content-end">
+                                        <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-success mx-1"><i class="fa-solid fa-eye"></i></a>
+                                        <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-warning mx-1"><i class="fa-solid fa-pen"></i></a>
+                                        <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" onsubmit="return confirm('Sicuro di voler eliminare il progetto {{ $project->name }}?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger mx-1" href="#"><i class="fa-solid fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="rigth-box w-50">
                 <div id="carouselExampleAutoplaying" class="carousel slide mt-3 ms-3 w-98" data-bs-ride="carousel">

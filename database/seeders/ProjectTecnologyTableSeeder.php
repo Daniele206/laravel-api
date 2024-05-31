@@ -17,7 +17,7 @@ class ProjectTecnologyTableSeeder extends Seeder
         // Array to store used combinations
         $usedCombinations = [];
 
-        for ($i = 0; $i < 60; $i++) {
+        for ($i = 0; $i < 120; $i++) {
             do {
                 $project = Project::inRandomOrder()->first();
                 $technology_id = Technology::inRandomOrder()->first()->id;
