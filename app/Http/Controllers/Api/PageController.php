@@ -30,4 +30,16 @@ class PageController extends Controller
 
         return response()->json($types);
     }
+
+    public function projectShow($slug){
+        $project = Project::where('slug', $slug)->with('type', 'technologies')->first();
+
+        if($project){
+            $succes = true;
+        }else{
+            $succes = false;
+        }
+
+        return response()->json(compact('succes', 'project'));
+    }
 }
